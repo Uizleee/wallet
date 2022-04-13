@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Wallet {
+  id: String!
+  balance: Float!
+  isActive: Boolean!
+}
+
+type Query {
+  getAllWallet: [Wallet!]!
+}
+
+type Mutation {
+  create(walletInput: WalletDto!): Wallet!
+}
+
+input WalletDto {
+  balance: Float!
+  isActive: Boolean
+}
