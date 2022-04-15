@@ -3,7 +3,10 @@ import { Field, InputType, } from '@nestjs/graphql'
 
 @InputType()
 export class WalletDto {
-  @Field()
+  // @Field({ nullable: true })
+  // id: string
+
+  @Field({nullable: true})
   balance: number
 
   @Field({ nullable: true })

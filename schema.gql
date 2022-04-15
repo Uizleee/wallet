@@ -4,19 +4,51 @@
 
 type Wallet {
   id: String!
-  balance: Float!
+  balance: Int!
   isActive: Boolean!
+  createdAt: DateTime!
+  updatedAT: DateTime!
+  transact: Transact!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Transact {
+  id: String!
+  cr: Int!
+  createdAt: DateTime!
+  updatedAT: DateTime!
+  wallet: Wallet!
 }
 
 type Query {
-  getAllWallet: [Wallet!]!
+  wallets: [Wallet!]!
+  wallet(id: String!): Wallet!
+  async: [Transact!]!
+  transaction(id: String!): Transact!
 }
 
 type Mutation {
   create(walletInput: WalletDto!): Wallet!
+  updateWallet(walletInput: WalletDtoUp!): Wallet!
+  createTR(transactInput: TransactDto!): Transact!
 }
 
 input WalletDto {
-  balance: Float!
+  balance: Float
+  isActive: Boolean
+}
+
+input WalletDtoUp {
+  id: String!
+  balance: Float
+  isActive: Boolean
+}
+
+input TransactDto {
+  cr: Float
   isActive: Boolean
 }
