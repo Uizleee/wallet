@@ -8,19 +8,32 @@ import { Transact } from './entities/transaction.entity'
 @Injectable()
 export class TransactService {
 
-  constructor(@InjectRepository(Transact) private _transactRepository: Repository<Transact>) {}
+  constructor(
+    @InjectRepository(Transact) private _transactRepository: Repository<Transact>
+  ) {}
 
   async findAll(): Promise<Transact[]> {
-    return await this._transactRepository.find()
+    return await this._transactRepository.find({
+      relations: ['wallet']
+    })
   }
 
-  async findByid(id:string): Promise<Transact | undefined> {
-    return await this._transactRepository.findOne({id})
+  async findByid(id:number): Promise<Transact | undefined> {
+    return await this._transactRepository.findOne({
+      where: { id },
+      relations: ['wallet']
+    })
   }
 
   async create(transact: TransactDto): Promise<Transact> {
-    const y = this._transactRepository.create(transact)
-    return await this._transactRepository.save(y)
+    const trasaction = this._transactRepository.create({
+      value: transact.value,
+      wallet: {
+        id: transact.walletId
+      }
+    })
+
+    return await this._transactRepository.save(trasaction)
 
   }
 }

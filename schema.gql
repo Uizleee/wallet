@@ -2,13 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Wallet {
-  id: String!
-  balance: Int!
-  isActive: Boolean!
+type Transact {
+  id: Float!
+  value: Int!
   createdAt: DateTime!
-  updatedAT: DateTime!
-  transact: Transact!
+  wallet: Wallet!
 }
 
 """
@@ -16,25 +14,26 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Transact {
+type Wallet {
   id: String!
-  cr: Int!
+  balance: Int!
+  isActive: Boolean!
   createdAt: DateTime!
   updatedAT: DateTime!
-  wallet: Wallet!
+  transact: [Transact!]!
 }
 
 type Query {
   wallets: [Wallet!]!
   wallet(id: String!): Wallet!
-  async: [Transact!]!
-  transaction(id: String!): Transact!
+  transactions: [Transact!]!
+  transaction(id: Float!): Transact!
 }
 
 type Mutation {
   create(walletInput: WalletDto!): Wallet!
   updateWallet(walletInput: WalletDtoUp!): Wallet!
-  createTR(transactInput: TransactDto!): Transact!
+  createTransaction(transactInput: TransactDto!): Transact!
 }
 
 input WalletDto {
@@ -49,6 +48,6 @@ input WalletDtoUp {
 }
 
 input TransactDto {
-  cr: Float
-  isActive: Boolean
+  value: Float
+  walletId: String
 }

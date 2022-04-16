@@ -7,8 +7,8 @@ export class TransactDto {
   // id: string
 
   @Field({nullable: true})
-  cr: number
+  value: number
 
   @Field({ nullable: true })
-  isActive: boolean
+  walletId: string
 }

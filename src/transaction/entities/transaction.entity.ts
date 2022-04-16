@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm'
 
 import { Wallet } from '../../wallet/entities/wallet.entity'
 
@@ -9,20 +9,16 @@ import { Wallet } from '../../wallet/entities/wallet.entity'
 export class Transact {
   @PrimaryGeneratedColumn()
   @Field()
-  id: string
+  id: number
   
   @Field(()=> Int)
   @Column()
-  cr: number
+  value: number
 
 
   @Field()
   @CreateDateColumn()
   createdAt: Date
-
-  @Field()
-  @UpdateDateColumn()
-  updatedAT: Date
   
   @ManyToOne(()=> Wallet, wallet=>wallet.transact)
   @Field(()=>Wallet)

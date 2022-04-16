@@ -4,8 +4,6 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import { Transact } from '../../transaction/entities/transaction.entity'
 
 
-
-
 @ObjectType()
 @Entity()
 export class Wallet {
@@ -30,6 +28,6 @@ export class Wallet {
   updatedAT: Date
 
   @OneToMany(()=>Transact, transact=>transact.wallet)
-  @Field(()=>Transact)
-  transact: Transact[]
+  @Field(()=>[Transact])
+  transact: [Transact]
 }

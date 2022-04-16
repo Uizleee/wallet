@@ -28,11 +28,6 @@ export class WalletResolver {
   async updateWallet(@Args('walletInput') walletDtoUp: WalletDtoUp): Promise<Wallet | undefined> {
     return await this._walletService.updateWallet(walletDtoUp)
   }
-
-  // @Mutation(() => Wallet )
-  // async deposit(@Args('walletInput') walletDtoUp: WalletDtoUp): Promise<Wallet | undefined> {
-  //   return await this._walletService.updateWallet(walletDtoUp)
-  // }
 }
 
 
