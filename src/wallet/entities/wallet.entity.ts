@@ -1,7 +1,9 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
 
-import { Transact } from 'src/transaction/entities/transaction.entity'
+import { Transact } from '../../transaction/entities/transaction.entity'
+
+
 
 
 @ObjectType()

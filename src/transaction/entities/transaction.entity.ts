@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm'
 
-import { Wallet } from 'src/wallet/entities/wallet.entity'
+import { Wallet } from '../../wallet/entities/wallet.entity'
 
 
 @ObjectType()
