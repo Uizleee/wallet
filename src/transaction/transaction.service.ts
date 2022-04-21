@@ -2,6 +2,9 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
+import { WalletService } from 'src/wallet/wallet.service'
+
+
 import { TransactDto } from './dto/create-transaction.input'
 import { Transact } from './entities/transaction.entity'
 
@@ -9,7 +12,8 @@ import { Transact } from './entities/transaction.entity'
 export class TransactService {
 
   constructor(
-    @InjectRepository(Transact) private _transactRepository: Repository<Transact>
+    @InjectRepository(Transact) private _transactRepository: Repository<Transact>,
+    private _walletService: WalletService
   ) {}
 
   async findAll(): Promise<Transact[]> {
@@ -26,8 +30,10 @@ export class TransactService {
   }
 
   async create(transact: TransactDto): Promise<Transact> {
+    const wallet = await this._walletService.findByid(transact.walletId)
     const trasaction = this._transactRepository.create({
       value: transact.value,
+      user: wallet?.user,
       wallet: {
         id: transact.walletId
       }

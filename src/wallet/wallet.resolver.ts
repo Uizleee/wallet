@@ -20,8 +20,8 @@ export class WalletResolver {
   }
 
   @Mutation(() => Wallet )
-  async create(@Args('walletInput') w: WalletDto): Promise<Wallet> {
-    return await this._walletService.create(w)
+  async createWallet(@Args('walletInput') w: WalletDto): Promise<Wallet> {
+    return await this._walletService.create(w.userId)
   }
 
   @Mutation(() => Wallet )

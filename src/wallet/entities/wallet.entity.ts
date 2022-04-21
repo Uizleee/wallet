@@ -1,7 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne } from 'typeorm'
 
 import { Transact } from '../../transaction/entities/transaction.entity'
+import { User } from '../../user/entities/user.entity'
 
 
 @ObjectType()
@@ -30,4 +31,8 @@ export class Wallet {
   @OneToMany(()=>Transact, transact=>transact.wallet)
   @Field(()=>[Transact])
   transact: [Transact]
+
+  @ManyToOne(()=> User, user=>user.wallet)
+  @Field(()=>User)
+  user : User
 }
